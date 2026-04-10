@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  minigun-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: minigun-api:latest
+    container_name: minigun-api
+    ports:
+      - "8000:8000"
+    environment:
+      MINIGUN_API_SECRET_KEY: ${MINIGUN_API_SECRET_KEY:-changeme}
+      MINIGUN_LOG_LEVEL: ${MINIGUN_LOG_LEVEL:-INFO}
+      MINIGUN_MAX_RETRIES: ${MINIGUN_MAX_RETRIES:-3}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
