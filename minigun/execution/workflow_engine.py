@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import time
 from datetime import datetime, timezone
 from typing import Any
 
@@ -11,6 +12,8 @@ from minigun.config import settings
 from minigun.models.core import Task, TaskGraph, TaskStatus
 
 logger = logging.getLogger(__name__)
+
+_BACKOFF_BASE: float = 1.0  # seconds; doubled on each retry
 
 
 def _now() -> datetime:
@@ -39,7 +42,7 @@ class WorkflowEngine:
         return all(dep in completed_ids for dep in task.dependencies)
 
     def _execute_task(self, task: Task) -> dict[str, Any]:
-        """Execute a single task with retry logic."""
+        """Execute a single task with exponential-backoff retry logic."""
         solver = self._get_solver(task.assigned_solver)
         last_error: Exception | None = None
 
@@ -57,6 +60,10 @@ class WorkflowEngine:
                     settings.MAX_RETRIES,
                     exc,
                 )
+                if attempt < settings.MAX_RETRIES:
+                    backoff = _BACKOFF_BASE * (2 ** (attempt - 1))
+                    logger.debug("Backing off %.1fs before retry", backoff)
+                    time.sleep(backoff)
 
         raise RuntimeError(f"Task '{task.name}' failed after {settings.MAX_RETRIES} retries") from last_error
 
