@@ -21,7 +21,7 @@ class CodeSolver:
         logger.info("CodeSolver solving task id=%s name=%s", task.id, task.name)
         name_lower = task.name.lower()
 
-        if "analyse" in name_lower or "analyze" in name_lower:
+        if "analyze" in name_lower or "analyse" in name_lower:
             result = self._registry.execute("git", {"action": "diff"})
             return {"status": "ok", "analysis": result, "task": task.name}
 

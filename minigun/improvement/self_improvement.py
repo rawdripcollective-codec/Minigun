@@ -60,7 +60,7 @@ class SelfImprovementOrchestrator:
             {
                 "id": "improve_solver_output_schema",
                 "priority": "high",
-                "description": "Standardise solver output schemas to always include 'status', 'task', and domain-specific keys.",
+                "description": "Standardize solver output schemas to always include 'status', 'task', and domain-specific keys.",
                 "rationale": "Critic agent penalises missing output keys; uniform schemas improve verification scores.",
             },
             {
