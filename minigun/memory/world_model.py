@@ -14,7 +14,7 @@ _CAUSAL_HINTS: dict[str, list[str]] = {
     "cpu": ["resource_exhaustion", "runaway_process", "insufficient_capacity"],
     "memory": ["memory_leak", "cache_bloat", "insufficient_capacity"],
     "disk": ["log_accumulation", "snapshot_backlog", "insufficient_storage"],
-    "latency": ["slow_query", "network_congestion", "external_dependency_degraded"],
+    "latency": ["slow_query", "network_congestion", "external_dependency_degradation"],
     "error": ["code_regression", "config_change", "dependency_failure"],
     "deploy": ["bad_artifact", "config_drift", "rollout_not_canary"],
     "crash": ["unhandled_exception", "oom_kill", "infra_failure"],

@@ -34,6 +34,6 @@ class JiraMCP(MCPTool):
             "status": "ok",
             "key": params.get("key", "MG-0001"),
             "summary": "Sample issue",
-            "status": "In Progress",
+            "issue_status": "In Progress",
             "action": action,
         }

@@ -17,7 +17,7 @@ class SelfImprovementOrchestrator:
         """Identify recurring failure patterns from eval results."""
         failures = [r for r in eval_results if not r.passed]
         if not failures:
-            logger.info("No failures to analyse")
+            logger.info("No failures to analyze")
             return []
 
         patterns: list[dict[str, Any]] = []
