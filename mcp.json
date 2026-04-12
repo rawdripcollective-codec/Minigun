@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "minigun-fastmcp": {
+      "command": "python",
+      "args": [
+        "fastmcp_server.py"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      },
+      "cwd": "."
+    }
+  }
+}
