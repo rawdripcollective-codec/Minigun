@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "minigun-fastmcp": {
+      "command": "python",
+      "args": [
+        "fastmcp_server.py"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1",
+        "MINIGUN_POLICY_MODE": "hardened",
+        "MINIGUN_PRINCIPAL": "anonymous",
+        "MINIGUN_ENABLE_HIGH_RISK_TOOLS": "0"
+      },
+      "cwd": "."
+    }
+  }
+}
